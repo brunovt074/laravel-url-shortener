@@ -9,9 +9,10 @@ use App\Http\Requests\ShortRequest;
 class ShortUrlController extends Controller
 {
     public function short(ShortRequest $request){
-        if($request -> original_url){
+        if($request->original_url){
+            
             $new_url = ShortUrl::create([
-                'original_url' => $request -> original_url
+                'original_url' => $request->original_url
             ]);
 
             if($new_url){
@@ -20,7 +21,9 @@ class ShortUrlController extends Controller
                     'short_url'=> $short_url
                 ]);
 
-                return redirect() -> back()-> with('success_message', 'Your Short URL is: <a class="text-green-500" href="' . url($short_url) .'">'. url($short_url) .'</a>');
+                return redirect()->back()->with('success_message', 
+                    'Your Short URL is: <a class="text-green-500" href="'
+                        . url($short_url) .'">'. url($short_url) .'</a>');
             }
         }
 
@@ -29,7 +32,13 @@ class ShortUrlController extends Controller
 
     public function show($code){
         
-        dd($code);
+        $short_url = ShortUrl::where('short_url', $code)->first();
+
+        if($short_url){
+            return redirect()->to(url($short_url->original_url));
+        }
+
+        return redirect()->to(url('/'));
 
     }
 }
