@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\ShortUrl;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShortRequest;
@@ -9,11 +10,19 @@ use App\Http\Requests\ShortRequest;
 class ShortUrlController extends Controller
 {
     public function short(ShortRequest $request){
+        
         if($request->original_url){
+
+            if(auth()->user()){
+                $new_url = auth()->user()->links()->create([
+                    'original_url' => $request->original_url
+                ]);
             
-            $new_url = ShortUrl::create([
-                'original_url' => $request->original_url
-            ]);
+            } else {
+                $new_url = ShortUrl::create([
+                    'original_url' => $request->original_url
+                ]);
+            }           
 
             if($new_url){
                 $short_url = base_convert($new_url->id, 10, 36);
