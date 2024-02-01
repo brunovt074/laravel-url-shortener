@@ -1,5 +1,22 @@
 <x-guest-layout>
-    <div class="py-12">
+    <div class="">
+        <section class="">
+            <h1 class="text-center">Short your Link</h1>
+            {{-- @if(session('success_message'))
+                {!! session('success_message') !!}
+            @endif
+            <form method="POST" action="{{ route('short.url') }}">
+                @csrf
+                <input class="rounded-lg" type="url" name="original_url"/>
+                @error('original_url')
+                    <span class=""> {{ $message }}</span>
+                @enderror
+
+                <button class="btn btn-primary" type="submit">Short URL</button>                            
+            </form> --}}
+        </section>
+    </div>
+    {{-- <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 flex justify-center bg-white border-b border-gray-200">
@@ -21,6 +38,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div>     --}}
 </x-guest-layout>
