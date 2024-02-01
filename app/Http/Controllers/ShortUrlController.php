@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\ShortUrl;
 use Illuminate\Http\Request;
 use App\Http\Requests\ShortRequest;
+use Illuminate\Support\Str;
 
 class ShortUrlController extends Controller
 {
@@ -25,7 +26,10 @@ class ShortUrlController extends Controller
             }           
 
             if($new_url){
-                $short_url = base_convert($new_url->id, 10, 36);
+                $uuid = $new_url->id;               
+                $base64_encoded = base64_encode($uuid);               
+                $short_url = base_convert($base64_encoded, 10, 36);
+                
                 $new_url->update([
                     'short_url'=> $short_url
                 ]);
