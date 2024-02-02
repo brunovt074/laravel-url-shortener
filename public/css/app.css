@@ -16,7 +16,12 @@ html,body{
 
 body{
 
-    background-color: #000;
+    background-color: #1F2544;
+}
+
+main {
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -25,10 +30,17 @@ body{
 }
 
 .input-div{   
-    
-    text-align:center;
+    text-align:center;    
+}
+
+.card{
+    background-color: #F0EDCF;
 }
 
 .navbar {
     min-height: 5rem;    
+}
+
+.btn {
+    background-color: #1F2544;
 }
