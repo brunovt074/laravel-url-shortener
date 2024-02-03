@@ -1,6 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        My Saved Links
+        <div class="index-header">
+          My Saved Links
+        </div>
+        <div class="">
+          <a class="btn btn-dark" href="{{ route('short.url')  }}">Home</a>
+        </div>        
     </x-slot>
     <div class="max-w-6xl mx-auto mt-8">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
