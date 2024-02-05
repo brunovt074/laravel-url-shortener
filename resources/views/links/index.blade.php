@@ -20,4 +20,4 @@
             </tbody>
         </table>
     </div>    
-</x-guest-layout>
+</x-app-layout>

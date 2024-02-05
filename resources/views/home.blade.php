@@ -21,4 +21,4 @@
             </form>
         </div>       
     </div>    
-</x-guest-layout>
+</x-app-layout>
