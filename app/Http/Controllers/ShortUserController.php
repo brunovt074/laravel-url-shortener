@@ -10,7 +10,7 @@ class ShortUserController extends Controller{
 
         $links = auth()->user()->links;
 
-        return view('links.index-2'/*, compact('links')*/);
+        return view('links.index-2', compact('links'));
     }
 
 }

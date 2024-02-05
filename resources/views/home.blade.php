@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-app-layout>
     <div class="col-lg-8 mt-2 pt-4 pb-4">
         <div class="container input-div pt-4 pb-4 rounded">
             <h1 class="title text-center pt-4 pb-4">Insert here your Link</h1>
