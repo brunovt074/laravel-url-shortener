@@ -13,9 +13,9 @@
                     <input class="col-12 rounded mt-2" type="url" name="original_url"/>
                     <button class="btn btn-dark mt-3 mb-2" type="submit">Short URL</button> 
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="alert-div">
                     @error('original_url')
-                    <div class="col-6 alert alert-danger"> {{ $message }}</span>
+                    <div class="alert alert-danger"> {{ $message }}</span>
                     @enderror
                 </div>
             </form>
