@@ -6,7 +6,7 @@
                 @csrf
                 <div class="card-body container d-inline-block justify-content-center rounded">
                     @if(session('success_message'))
-                        <div class="alert alert-success pb-3">
+                        <div class="alert alert-success pb-3" id="successMessage">
                             {!! session('success_message') !!}
                         </div>                            
                         @endif
@@ -15,10 +15,10 @@
                 </div>
                 <div class="alert-div">
                     @error('original_url')
-                    <div class="alert alert-danger"> {{ $message }}</span>
+                    <div class="alert alert-danger" id="badUrlMessage"> {{ $message }}</span>
                     @enderror
                 </div>
             </form>
-        </div>        
+        </div>       
     </div>    
 </x-guest-layout>
