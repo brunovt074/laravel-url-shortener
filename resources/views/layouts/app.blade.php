@@ -23,7 +23,8 @@
                   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                       <a class="nav-link active" aria-current="page" href="{{ route ('short.url') }}" >Home</a>
-                      <a class="nav-link" href="{{ route ('user.links') }}">My Saved Links</a>                      
+                      <a class="nav-link" href="{{ route ('user.links') }}">My Saved Links</a>
+                      <a class="nav-link" href="#">About</a>                      
                     </div>
                   </div>
                 </div>
