@@ -23,9 +23,9 @@ RUN composer install
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 #COPY migrate.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/migrate.sh
+#RUN chmod +x /usr/local/bin/migrate.sh
 
-CMD ["migrate.sh"]
+#CMD ["migrate.sh"]
 
 EXPOSE 8000
 
