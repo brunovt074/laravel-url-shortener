@@ -5,7 +5,7 @@ RUN apt-get update && \
     apt-get install -y libzip-dev zip && \
     docker-php-ext-install pdo_mysql zip
 
-COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
