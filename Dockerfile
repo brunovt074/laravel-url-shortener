@@ -22,7 +22,7 @@ RUN composer install
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-COPY migrate.sh /usr/local/bin/
+#COPY migrate.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/migrate.sh
 
 CMD ["migrate.sh"]
