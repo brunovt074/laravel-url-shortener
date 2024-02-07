@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "8001:80"
     volumes:
       - .:/var/www/html
     depends_on:
@@ -16,8 +16,7 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: url_shortener_db
-      MYSQL_USER: root
+      MYSQL_DATABASE: url_shortener_db      
       MYSQL_PASSWORD: 4563
     ports:
       - "3310:3306"
