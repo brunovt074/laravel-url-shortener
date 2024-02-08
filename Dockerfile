@@ -1,33 +1,59 @@
 FROM php:8.3.2-apache
 
-# Instala dependencias y extensiones necesarias para Laravel
-RUN apt-get update && \
-    apt-get install -y libzip-dev zip && \
-    docker-php-ext-install pdo_mysql zip
+WORKDIR /var/www/html/public
 
-COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN a2enmod rewrite
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Instala dependencias y extensiones necesarias para Laravel
+RUN apt-get update && apt-get install -y \
+    libicu-dev zip \
+    libmariadb-dev \
+    unzip zip \
+    zlib1g-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libpng-dev
 
-COPY . /var/www/html
+#Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+#COPY . /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# PHP Extension 
+RUN docker-php-ext-install gettext intl pdo_mysql gd
 
-RUN composer install
+RUN docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# RUN apt-get update && \
+#     apt-get install -y \
+#     libzip-dev zip && \
+#     docker-php-ext-install pdo_mysql zip
 
-#COPY migrate.sh /usr/local/bin/
-#RUN chmod +x /usr/local/bin/migrate.sh
+# COPY docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 
-#CMD ["migrate.sh"]
 
-EXPOSE 8000
+# ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+# RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+# RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
+# COPY . /var/www/html
+
+
+
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# RUN composer install
+
+# RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# #COPY migrate.sh /usr/local/bin/
+# #RUN chmod +x /usr/local/bin/migrate.sh
+
+# #CMD ["migrate.sh"]
+
+# EXPOSE 8000
 
 # # Copia los archivos de tu aplicación al contenedor
 # COPY . /var/www/html

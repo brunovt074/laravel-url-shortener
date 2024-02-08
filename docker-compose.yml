@@ -10,26 +10,23 @@ services:
     volumes:
       - .:/var/www/html
     depends_on:
-      - mysql
-
+      - mysqlversion: '3'
+      
   mysql:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: 4563
       MYSQL_DATABASE: url_shortener_db      
+      MYSQL_USER: root
       MYSQL_PASSWORD: 4563
     ports:
       - "3310:3306"
     volumes:
-      - ./docker/mysql:/docker-entrypoint-initdb.d
+      - ./docker/mysql:/docker-entrypoint-initdb.d    
 
-  apache:
-    build:
-      context: .
-      dockerfile: Dockerfile
+phpmyadmin:
+    image: phpmyadmin:latest
     ports:
-      - "8000:80"
-    volumes:
-      - .:/var/www/html
-    depends_on:
-      - mysql
+    - 9001:80
+    environment:
+      - PMA_ARBITRARY=1
